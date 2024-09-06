@@ -8,7 +8,8 @@ export default function WelcomePage() {
     const router = useRouter()
 
     const logOutFun = () => {
-        router.push('/')
+        router.push('/');
+        localStorage.clear();
     }
     return (
         <>
