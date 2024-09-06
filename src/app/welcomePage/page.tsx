@@ -9,7 +9,7 @@ export default function WelcomePage() {
 
     const logOutFun = () => {
         router.push('/login');
-        localStorage.clear();
+        // localStorage.clear();
     }
     return (
         <>
