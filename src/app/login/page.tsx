@@ -13,20 +13,15 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const router = useRouter()
 
-    const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log("user login successfully");
-                router.push('/welcomePage')
-
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
+    const handleLogin = async () => {
+        try {
+            const user = await signInWithEmailAndPassword(auth, email, password)
+            console.log("user => " ,user);
+            router.push('/welcomePage')
+            
+        } catch (error) {
+            
+        }
     }
 
     return (
