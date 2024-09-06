@@ -1,6 +1,7 @@
 "use client"
 
 import { auth } from "@/firebase/firebaseconfig"
+import { CircularProgress } from "@mui/material"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -12,15 +13,19 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
 
     const handleLogin = async () => {
+        setLoading(true)
         try {
             const user = await signInWithEmailAndPassword(auth, email, password)
-            console.log("user => " ,user);
+            /* console.log("user => ", user); */
             router.push('/welcomePage')
-            
+            setEmail("");
+            setPassword("");
         } catch (error) {
-            
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -38,10 +43,11 @@ export default function Login() {
                         value={email} onChange={e => setEmail(e.target.value)} />
                     <input type="password" placeholder="Password" className="border border-border rounded-lg p-2 w-full mt-2"
                         value={password} onChange={e => setPassword(e.target.value)} />
-                    <button className="bg-destructive text-destructive-foreground p-2 rounded-lg w-full mt-4 hover:bg-destructive/80" onClick={handleLogin}>login</button>
-
+                    <button className="bg-destructive text-destructive-foreground p-2 rounded-lg w-full mt-4 hover:bg-destructive/80" onClick={handleLogin} disabled={loading && true}>
+                    {loading ? <CircularProgress color="secondary" /> : "login"}
+                    </button>
                 </div>
-                <p className="text-center text-muted-foreground mt-4">Don't have an account?<Link href={'/'}> Create Account</Link></p>
+                <p className="text-center text-muted-foreground mt-4">{`Don't have an account?`}<Link href={'/'}> Create Account</Link></p>
             </div>
         </div>
 
