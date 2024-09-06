@@ -2,7 +2,7 @@
 
 import { auth } from "@/firebase/firebaseconfig"
 import { loginpWithEmailPassword, signupWithEmailPassword } from "@/firebase/firebseauth"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -13,12 +13,12 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const router = useRouter()
 
-    const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password)
+    const handleSignUp = () => {
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
+                // Signed up 
                 const user = userCredential.user;
-                console.log("user login successfully");
+                console.log("user successfully signup");
                 router.push('/welcomePage')
 
                 // ...
@@ -26,6 +26,8 @@ export default function Login() {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.error(errorMessage);
+                // ..
             });
     }
 
@@ -44,10 +46,10 @@ export default function Login() {
                     <input type="password" placeholder="Password" className="border border-border rounded-lg p-2 w-full mt-2"
                         value={password} onChange={e => setPassword(e.target.value)} />
                     <button className="bg-destructive text-destructive-foreground p-2 rounded-lg w-full mt-4 hover:bg-destructive/80" onClick={() => { signupWithEmailPassword(email, password) }}>SIGNUP</button>
-                    <button className="bg-destructive text-destructive-foreground p-2 rounded-lg w-full mt-4 hover:bg-destructive/80" onClick={handleLogin}>login</button>
+                    <button className="bg-destructive text-destructive-foreground p-2 rounded-lg w-full mt-4 hover:bg-destructive/80" onClick={handleSignUp}>SignUp</button>
 
                 </div>
-                {/* <p className="text-center text-muted-foreground mt-4">Don't have an account? <a href="#" className="text-primary">SIGN UP NOW</a></p> */}
+                {/* <p className="text-center text-muted-foreground mt-4">Don't have an account? <a href={'/signup'} className="text-primary">SIGN UP NOW</a></p> */}
             </div>
         </div>
 

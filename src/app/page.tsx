@@ -11,17 +11,6 @@ export default function Home() {
   return (
 
     <div className="mx-auto">
-     {/*  <input className="border" type="email"
-        name="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      /><br />
-      <input className="border" type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      /><br />
-      <button onClick={() => { signupWithEmailPassword(email, password) }}>Signup</button> */}
-      <Login />
     </div>
   );
 }
