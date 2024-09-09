@@ -8,7 +8,6 @@ import { useState } from "react"
 
 
 export default function SignUp() {
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const router = useRouter()
@@ -16,12 +15,11 @@ export default function SignUp() {
     const handleSignUp = async () => {
         try {
             const user = await createUserWithEmailAndPassword(auth, email, password)
-            router.push('/login')
             console.log("user successfully signin");
             setEmail("")
             setPassword("")
         } catch (error) {
-            
+            console.log("dont signup");            
         }
     }
 
@@ -44,6 +42,5 @@ export default function SignUp() {
                 <p className="text-center text-muted-foreground mt-4">Do you have any account?<Link href={'/login'}> Login</Link></p>
             </div>
         </div>
-
     )
 }

@@ -19,11 +19,12 @@ export default function Login() {
         setLoading(true)
         try {
             const user = await signInWithEmailAndPassword(auth, email, password)
-            /* console.log("user => ", user); */
             router.push('/welcomePage')
             setEmail("");
             setPassword("");
         } catch (error) {
+            console.log("Dont login");
+            
         } finally {
             setLoading(false)
         }
@@ -31,7 +32,7 @@ export default function Login() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-background">
-            <div className="bg-card p-6 rounded-lg shadow-md w-96">
+          <div className="bg-card p-6 rounded-lg shadow-md w-96">
                 <h2 className="text-2xl font-bold text-foreground text-center mb-4">Login</h2>
                 <div className="flex flex-col space-y-2">
                     <button className="bg-primary text-primary-foreground p-2 rounded-lg hover:bg-primary/80">Login with Facebook</button>
@@ -50,6 +51,5 @@ export default function Login() {
                 <p className="text-center text-muted-foreground mt-4">{`Don't have an account?`}<Link href={'/'}> Create Account</Link></p>
             </div>
         </div>
-
     )
 }
