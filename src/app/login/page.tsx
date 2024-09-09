@@ -23,7 +23,7 @@ export default function Login() {
             setEmail("");
             setPassword("");
         } catch (error) {
-            console.log("Dont login");
+            console.log("Can't login", error);
             
         } finally {
             setLoading(false)
